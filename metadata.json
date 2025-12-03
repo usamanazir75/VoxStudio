@@ -1,0 +1,5 @@
+{
+  "name": "VoxStudio Pro",
+  "description": "A professional AI voiceover tool featuring advanced voice categorization and multi-speaker script analysis using Gemini 2.5.",
+  "requestFramePermissions": []
+}
