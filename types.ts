@@ -10,6 +10,15 @@ export interface Voice {
   language?: string; // BCP-47 tag (e.g., 'en-US')
   isPremium?: boolean;
   isCloned?: boolean;
+  qualityReport?: VoiceQualityReport; // NEW: For cloned voices
+}
+
+export interface VoiceQualityReport {
+    mosScore: number; // 1.0 - 5.0
+    similarity: number; // 0.0 - 100.0%
+    stability: number; // 0.0 - 100.0%
+    dateCreated: number;
+    consentVerified: boolean;
 }
 
 export enum VoiceCategory {
@@ -88,6 +97,7 @@ export interface TTSSettings {
     similarity: number;  // 0.0 - 1.0 (Maps to TopP)
     style: number;       // 0.0 - 1.0 (Exaggeration)
     speakerBoost: boolean;
+    pitch: number;
 }
 
 export interface HistoryItem {

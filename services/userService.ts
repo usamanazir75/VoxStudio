@@ -1,5 +1,5 @@
 
-import { User, CreditRequest, Voice, VoiceCategory } from '../types';
+import { User, CreditRequest, Voice, VoiceCategory, VoiceQualityReport } from '../types';
 
 const USERS_KEY = 'vox_users_db';
 const REQUESTS_KEY = 'vox_requests_db';
@@ -192,7 +192,8 @@ export const userService = {
         }
     },
 
-    addClonedVoice: (userId: string, voiceName: string, gender: 'Male'|'Female') => {
+    // Updated with Quality Report support
+    addClonedVoice: (userId: string, voiceName: string, gender: 'Male'|'Female', qualityReport?: VoiceQualityReport) => {
         const users: User[] = JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
         const index = users.findIndex(u => u.id === userId);
         if (index !== -1) {
@@ -201,10 +202,11 @@ export const userService = {
                 name: voiceName,
                 category: VoiceCategory.CLONED,
                 gender: gender,
-                tags: ['Cloned', 'Custom', 'AI'],
+                tags: ['Cloned', 'Custom', 'High-Fidelity'],
                 apiVoiceName: gender === 'Male' ? 'Fenrir' : 'Kore', // Mapping to base models for demo
                 language: 'en-US',
-                isCloned: true
+                isCloned: true,
+                qualityReport: qualityReport
             };
             
             if(!users[index].clonedVoices) users[index].clonedVoices = [];
